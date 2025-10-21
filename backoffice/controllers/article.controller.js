@@ -12,39 +12,37 @@ class ArticleController {
         const article = new Article({
             titre, hashtags, description, image: image || null, authorId, status: 'published',
         });
-
         const savedArticle = await article.save();
         const populatedArticle = await Article.findById(savedArticle._id).populate('authorId', 'username role');
         res.status(201).json({
             message: 'Article créé avec succès', article: populatedArticle,
         });
     }
+
     async getArticlesByProfileId(req, res) {
-        const { profileId } = req.params;
-        const { status } = req.query;
+        const {profileId} = req.params;
+        const {status} = req.query;
 
         if (!profileId) {
             throw new AppError('ID de profil manquant', 400);
         }
 
-        const filter = { authorId: profileId };
+        const filter = {authorId: profileId};
         if (status) {
             filter.status = status;
         }
 
         const articles = await Article.find(filter)
             .populate('authorId', 'username role')
-            .sort({ createdAt: -1 });
+            .sort({createdAt: -1});
 
         res.status(200).json({
-            message: `Articles du profil ${profileId}`,
-            articles,
-            count: articles.length
+            message: `Articles du profil ${profileId}`, articles, count: articles.length
         });
     }
 
     async getArticleById(req, res) {
-        const { id } = req.params;
+        const {id} = req.params;
 
         if (!id) {
             throw new AppError('ID d\'article manquant', 400);
@@ -58,8 +56,7 @@ class ArticleController {
         }
 
         res.status(200).json({
-            message: 'Article récupéré avec succès',
-            article
+            message: 'Article récupéré avec succès', article
         });
     }
 

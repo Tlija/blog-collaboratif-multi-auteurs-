@@ -13,9 +13,8 @@ const validate = (req, res, next) => {
     next();
 };
 
-// Routes
 router.post('/articles', authMiddleware, validate, articleController.createArticle.bind(articleController));
 router.get('/articles', articleController.getAllArticles.bind(articleController));
-router.get('/articles/:profileId',  articleController.getArticlesByProfileId.bind(articleController));
-router.get('/articles/:id',  articleController.getArticleById.bind(articleController));
+router.get('/articles/profile/:profileId', articleController.getArticlesByProfileId.bind(articleController));
+router.get('/articles/:id', articleController.getArticleById.bind(articleController));
 module.exports = router;
