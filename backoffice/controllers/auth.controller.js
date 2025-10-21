@@ -10,7 +10,7 @@ class AuthController {
 
     createToken = (id) => {
         return jwt.sign({id}, this.ACCESS_TOKEN_SECRET, {
-            expiresIn: '1800s'
+            expiresIn: '24h'
         });
     };
 

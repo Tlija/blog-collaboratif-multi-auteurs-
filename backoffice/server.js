@@ -7,6 +7,7 @@ const errorHandler = require('./middleware/error_handler');
 const authRoutes = require('./routes/auth.routes');
 const adminRoutes = require('./routes/admin.routes');
 const visitorRoutes = require('./routes/visitor.routes');
+const articlesRoutes = require('./routes/article.routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ configureServer(app, {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/admin/', adminRoutes);
+app.use('/api/users/', articlesRoutes);
 app.use('/api/visitor', visitorRoutes);
 
 app.use(errorHandler);
