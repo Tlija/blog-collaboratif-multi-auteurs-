@@ -20,46 +20,44 @@ class AuthController {
     }
 
     async register(req, res) {
-        const {username, email, password, role} = req.body;
-        console.log('DEBUG register: Body reçu:', {username, email, role});
+        const {username, email, password,} = req.body;
+        console.log('DEBUG register: Body reçu:', {username, email, password});
 
-        if (!username || !email || !password || !role) {
-            throw new AppError('Champs requis manquants : username, email, password, role', 400);
+        if (!username || !email || !password) {
+            throw new AppError('Champs requis manquants : username, email, password, ', 400);
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({username, email, password: hashedPassword, role});
+        const user = new User({username, email, password: hashedPassword,});
         const savedUser = await user.save();
 
         res.status(201).json({message: 'User registered successfully', userId: savedUser._id});
     }
 
     async login(req, res) {
-        const {email, password} = req.body;
+        try {
+            const {email, password} = req.body;
+            const user = await User.findOne({email});
+            if (!user) {
+                return res.status(401).json({error: 'Invalid email or password'});
+            }
+            if (user.status !== 'active') {
+                return res.status(403).json({error: 'Votre compte est verrouillé'});
+            }
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (!isPasswordValid) {
+                return res.status(401).json({error: 'Invalid email or password'});
+            }
 
-        if (!email || !password) {
-            throw new AppError('Email et mot de passe requis', 400);
+            const token = this.createToken(user._id);
+            const id = user._id
+            const {username, role} = user;
+
+            res.status(200).json({token, username, role, id});
+        } catch (error) {
+            res.status(500).json({error: error.message});
         }
-
-        const user = await User.findOne({email});
-        if (!user) {
-            throw new AppError('Email ou mot de passe invalide', 401);
-        }
-
-        if (user.status !== 'active') {
-            throw new AppError('Votre compte est verrouillé', 403);
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            throw new AppError('Email ou mot de passe invalide', 401);
-        }
-
-        const token = this.createToken(user._id);
-        const {username, role} = user;
-
-        res.status(200).json({token, username, role, id: user._id});
-    }
+    };
 
     async getUserDetails(req, res) {
         const {id} = req.params;

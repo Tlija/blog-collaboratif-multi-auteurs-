@@ -17,6 +17,7 @@ const validate = (req, res, next) => {
 // Routes
 router.post('/register', authValidator.register, validate, authController.register.bind(authController));
 router.post('/login', authValidator.login, validate, authController.login.bind(authController));
+router.get('/users', validate, authController.getAllUsers.bind(authController));
 
 
 module.exports = router;

@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         type: String, enum: {
             values: ['Admin', 'Éditeur', 'Rédacteur', 'Lecteur'],
             message: 'Le rôle doit être Admin, Éditeur, Rédacteur ou Lecteur',
-        }, default: 'Lecteur', required: [true, 'Le rôle est requis'],
+        }, default: 'Lecteur',
     }, status: {
         type: String, enum: {
             values: ['active', 'suspended', 'pending'], message: 'Le statut doit être active, suspended ou pending',
