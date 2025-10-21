@@ -21,7 +21,6 @@ class AuthController {
 
     async register(req, res) {
         const {username, email, password,} = req.body;
-        console.log('DEBUG register: Body reçu:', {username, email, password});
 
         if (!username || !email || !password) {
             throw new AppError('Champs requis manquants : username, email, password, ', 400);
