@@ -73,6 +73,73 @@ class ArticleController {
         }
     }
 
+
+    async updateArticle(req, res) {
+        const {id} = req.params;
+        const {titre, hashtags, description, image, status} = req.body;
+        const userId = req.user?.id;
+
+        if (!id) {
+            throw new AppError('ID d\'article manquant', 400);
+        }
+
+        const article = await Article.findById(id);
+        if (!article) {
+            throw new AppError('Article non trouvé', 404);
+        }
+
+        this._validateOwnership(article.authorId.toString(), userId);
+
+        const updates = {};
+        if (titre !== undefined) updates.titre = titre;
+        if (hashtags !== undefined) updates.hashtags = hashtags;
+        if (description !== undefined) updates.description = description;
+        if (image !== undefined) updates.image = image || null;
+        if (status !== undefined) updates.status = status;
+
+        if (titre !== undefined || description !== undefined || hashtags !== undefined || image !== undefined) {
+            this._validateArticleInput({
+                titre: titre || article.titre,
+                hashtags: hashtags || article.hashtags,
+                description: description || article.description,
+                image: image || article.image
+            });
+        }
+        if (status !== undefined) {
+            this._validateStatus(status);
+        }
+
+        const updatedArticle = await Article.findByIdAndUpdate(id, updates, {new: true, runValidators: true})
+            .populate('authorId', 'username role');
+
+        res.status(200).json({
+            message: 'Article mis à jour avec succès', article: updatedArticle
+        });
+    }
+
+    async deleteArticle(req, res) {
+        const { id } = req.params;
+        const userId = req.user?.id;
+
+        if (!id) {
+            throw new AppError('ID d\'article manquant', 400);
+        }
+
+        const article = await Article.findById(id);
+        if (!article) {
+            throw new AppError('Article non trouvé', 404);
+        }
+
+        this._validateOwnership(article.authorId.toString(), userId);
+
+        await Article.findByIdAndDelete(id);
+
+        res.status(200).json({
+            message: 'Article supprimé avec succès',
+            deletedId: id
+        });
+    }
+
     _validateArticleInput({titre, hashtags, description, image}) {
         if (!titre || !description || !hashtags || !Array.isArray(hashtags)) {
             throw new AppError('Champs requis manquants : titre, hashtags (array), description', 400);
@@ -85,6 +152,13 @@ class ArticleController {
     _isValidImageUrl(url) {
         const imageRegex = /^https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp)$/i;
         return imageRegex.test(url);
+    }
+
+    _validateOwnership(articleAuthorId, userId) {
+        const userRole = req.user?.role;
+        if (articleAuthorId !== userId && userRole !== 'Admin') {
+            throw new AppError('Accès refusé : vous n\'êtes pas l\'auteur ou un administrateur', 403);
+        }
     }
 }
 
