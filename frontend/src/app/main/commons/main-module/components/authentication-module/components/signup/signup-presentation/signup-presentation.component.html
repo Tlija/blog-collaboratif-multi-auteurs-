@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="login-card">
+    <h2>Sign Up</h2>
+    <div class="form-group">
+      <input type="text" class="input-field b-r-4" placeholder="Company / Organization" required>
+      <input type="text" class="input-field" placeholder="First Name" required>
+      <input type="text" class="input-field" placeholder="Last Name" required>
+    </div>
+
+    <div class="form-group">
+      <select class="input-field">
+        <option value="Tunisia">Tunisia</option>
+        <!-- Add more countries as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <select class="input-field">
+        <option value="Europe - Berlin (UTC+1:00)">Europe - Berlin (UTC+1:00)</option>
+        <!-- Add more timezones as needed -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <input type="tel" class="input-field b-r-4" placeholder="Phone" required>
+      <input type="email" class="input-field" placeholder="Email" required>
+      <input type="password" class="input-field" placeholder="Password" required>
+    </div>
+
+    <div class="terms">
+      <input type="checkbox" id="terms" required>
+      <span class="label">
+        By registering, you declare that you agree to our <a href="#" class="link">Terms and Conditions</a> as well as the <a
+        href="#" class="link">Data Processing Agreement</a> and take note of our <a href="#"
+                                                                                    class="link">Privacy Policy</a>.
+      </span>
+    </div>
+
+    <button type="button" class="signup-btn">Sign up</button>
+
+    <div class="login-link">
+      <span>Already signed up?</span>
+      <a  class="link" [routerLink]="loginRouterLink"> Log in</a>
+    </div>
+  </div>
+</div>

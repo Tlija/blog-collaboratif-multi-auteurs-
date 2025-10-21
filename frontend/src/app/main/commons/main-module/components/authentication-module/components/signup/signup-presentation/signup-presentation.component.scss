@@ -1,0 +1,189 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 92vh;
+  padding: 1rem 0;
+}
+
+.link {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.login-card {
+  width: 540px;
+  max-width: 100%; /* Ensure it doesn't exceed container width */
+  height: auto;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.25rem;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.form-group {
+  width: 80%;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #555;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  border-radius: 0; /* Reset border-radius for consistency */
+  transition: all 0.3s ease; /* Smooth transition for focus */
+}
+
+.b-r-4 {
+  border-radius: 4px 4px 0 0;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.terms {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: start;
+  width: 80%;
+}
+
+.terms input {
+  margin-right: 10px;
+}
+
+.signup-btn {
+  width: 80%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+  background-color: #0056b3;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-card {
+    width: 90%; /* Slightly narrower on tablets */
+    padding: 15px;
+  }
+
+  .form-group {
+    width: 90%; /* Adjust form group width */
+  }
+
+  .terms {
+    width: 90%;
+  }
+
+  .signup-btn {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    width: 100%; /* Full width on mobile */
+    padding: 10px;
+    border-radius: 8px; /* Slightly more rounded corners for mobile */
+  }
+
+  h2 {
+    font-size: 20px; /* Smaller heading */
+    margin-bottom: 15px;
+  }
+
+  .form-group {
+    width: 100%; /* Full width for form groups */
+    margin-bottom: 10px;
+  }
+
+  .input-field {
+    font-size: 13px; /* Smaller font size */
+    padding: 8px; /* Slightly less padding */
+  }
+
+  .terms {
+    width: 100%;
+    font-size: 12px; /* Smaller text */
+    align-items: center; /* Better alignment */
+  }
+
+  .terms input {
+    margin-right: 8px;
+  }
+
+  .signup-btn {
+    width: 100%;
+    font-size: 14px; /* Smaller button text */
+    padding: 8px;
+  }
+
+  .login-link {
+    font-size: 12px; /* Smaller text */
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-card {
+    padding: 8px;
+  }
+
+  .input-field {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .signup-btn {
+    font-size: 13px;
+    padding: 6px;
+  }
+}
