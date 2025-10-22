@@ -26,7 +26,6 @@ export class NavbarComponent {
   }
   goToHomePage() {
     this._router.navigate([CommonRouteContainerModel.HOME_ROUTE.fullPath]);
-
   }
 
   showDropdown(dropdownId: string) {

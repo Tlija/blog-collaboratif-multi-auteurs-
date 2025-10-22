@@ -26,6 +26,6 @@ export const COMMON_ROUTES: Route[] = [
 
   {
     path: CommonRouteContainerModel.ANY_OTHER_COMMON_ROUTE.path,
-    redirectTo: CommonRouteContainerModel.HOME_ROUTE.path
+    redirectTo: CommonRouteContainerModel.SIGNUP_ROUTE.path
   },
 ];

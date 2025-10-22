@@ -1,8 +1,9 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { ROUTES } from './core/routing/app.routes';
+import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
+import {ROUTES} from './core/routing/app.routes';
+import {provideHttpClient, withFetch} from '@angular/common/http';
 
 
 export const appConfig: ApplicationConfig = {
@@ -10,6 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(ROUTES),
+    provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay())
   ]
 };
