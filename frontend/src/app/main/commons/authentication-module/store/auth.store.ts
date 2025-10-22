@@ -67,7 +67,7 @@ export const AuthStore = signalStore(
                   error: null
                 });
 
-                router.navigate(['/dashboard']);
+                router.navigate(['/home']);
               }),
               catchError((error) => {
                 const errorMessage = error.error?.error || 'Login failed';

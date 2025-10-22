@@ -3,9 +3,9 @@
     <div class="upper-section hide-on-mobile"></div>
     <div class="lower-section">
       <div class="login-form">
-        <input type="email" placeholder="email">
-        <input type="password" placeholder="password">
-        <input type="button" class="login-button" value="Log in with Email">
+        <input type="email"  [(ngModel)]="formData().username" placeholder="email">
+        <input type="password"  [(ngModel)]="formData().password" placeholder="password">
+        <input type="button" (click)="onSubmit()" class="login-button" value="Log in with Email">
         <div class="other-options">
           <span>New to Fanpage Karma? <span class="link" [routerLink]="signupRouterLink">Sign up</span></span>
         </div>

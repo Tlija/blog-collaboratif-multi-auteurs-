@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LoginPresentationComponent } from '../login-presentation/login-presentation.component';
+import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/core';
+import {LoginPresentationComponent} from '../login-presentation/login-presentation.component';
+import {AuthStore} from '../../../store/auth.store';
+import {ProfileModel} from '../../../models/profile.model';
 
 @Component({
   selector: 'app-login-container',
@@ -9,4 +11,24 @@ import { LoginPresentationComponent } from '../login-presentation/login-presenta
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class LoginContainerComponent {}
+export class LoginContainerComponent {
+  authStore = inject(AuthStore);
+  isLoading = computed(() => this.authStore.isLoading());
+  error = computed(() => this.authStore.error());
+
+  onLogin(formData: ProfileModel) {
+
+    console.log('Form data received:', formData);
+
+    if (!formData.username || !formData.email || !formData.password) {
+      return;
+    }
+
+    this.authStore.login({
+      expectedRole: 'user',
+      email: formData.email,
+      password: formData.password,
+    });
+  }
+
+}
