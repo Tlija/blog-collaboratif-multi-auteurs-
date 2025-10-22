@@ -15,22 +15,22 @@ import {CommonRouteContainerModel} from '../../../../../../core/routing/common-r
   styleUrl: './signup-container.component.scss',
 })
 export class SignupContainerComponent {
-  // authStore = inject(AuthStore);
+  authStore = inject(AuthStore);
 
   onSignup(formData: ProfileModel) {
 
     console.log('Form data received:', formData);
 
-    // if (!formData.username || !formData.email || !formData.password) {
-    //   console.error('Missing required fields');
-    //   return;
-    // }
+    if (!formData.username || !formData.email || !formData.password) {
+      console.error('Missing required fields');
+      return;
+    }
 
-    // this.authStore.register({
-    //   username: formData.username,
-    //   email: formData.email,
-    //   password: formData.password,
-    // });
+    this.authStore.register({
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    });
   }
 
 
