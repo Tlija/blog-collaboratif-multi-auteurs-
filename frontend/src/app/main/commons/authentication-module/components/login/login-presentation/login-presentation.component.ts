@@ -13,7 +13,6 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginPresentationComponent {
   readonly signupRouterLink = CommonRouteContainerModel.SIGNUP_ROUTE.fullPath;
-  readonly forgotPasswordRouterLink = CommonRouteContainerModel.FORGET_PASSWORD_ROUTE.fullPath;
 
 
 }

@@ -15,7 +15,7 @@ export class CommonRouteContainerModel extends RouteContainerModel {
         path: 'signup',
       },
       CommonRouteContainerModel
-    ); 
+    );
   static readonly ANY_OTHER_COMMON_ROUTE: CommonRouteContainerModel =
     RouteContainerModel.createRouteContainerModelFactory(
       {
