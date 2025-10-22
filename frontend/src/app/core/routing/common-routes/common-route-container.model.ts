@@ -16,6 +16,13 @@ export class CommonRouteContainerModel extends RouteContainerModel {
       },
       CommonRouteContainerModel
     );
+  static readonly HOME_ROUTE: CommonRouteContainerModel =
+    RouteContainerModel.createRouteContainerModelFactory(
+      {
+        path: 'home',
+      },
+      CommonRouteContainerModel
+    );
   static readonly ANY_OTHER_COMMON_ROUTE: CommonRouteContainerModel =
     RouteContainerModel.createRouteContainerModelFactory(
       {

@@ -1,32 +1,65 @@
 <div class="navbar">
-  <div class="navbar-left">
-    <a href="#" class="brand">Blog-collaboratif</a>
-  </div>
-  <div class="navbar-right" [class.active]="isMenuOpen">
-    <div class="nav-item" (mouseenter)="showDropdown('features')" (mouseleave)="hideDropdown('features')">
-      <a href="#">Solutions</a>
-      <div class="dropdown" *ngIf="isDropdownVisible('features')">
-        <a href="#">Analytics</a>
-        <a href="#">Engage</a>
-        <a href="#">Publish</a>
-        <a href="#">Discovery</a>
-        <a href="#">Find Influencers</a>
-        <a href="#">Social Monitoring</a>
-        <a href="#">All features</a>
+
+  @if (!isUserLoggedIn) {
+    <div class="navbar-left">
+      <a class="brand" (click)="goToHomePage()">BlogLogo</a>
+    </div>
+
+    <div class="navbar-right" [class.active]="isMenuOpen">
+      <div class="nav-item" (mouseenter)="showDropdown('features')" (mouseleave)="hideDropdown('features')">
+        @if (isDropdownVisible('features')) {
+
+          <div class="dropdown">
+            <a href="#">Discovery</a>
+            <a href="#">Find Influencers</a>
+            <a href="#">Social Monitoring</a>
+            <a href="#">All features</a>
+          </div>
+        }
+      </div>
+      <div class="login-buttons">
+        <a class="login" (click)="goToLogin()">Login</a>
+        <a class="signup" (click)="goToSignUp()">SignUp</a>
       </div>
     </div>
-    <a href="#">Businesses</a>
-    <a href="#">Pricing</a>
-    <a href="#">Resources</a>
-    <a href="#">Free Tools</a>
-    <div class="login-buttons">
-      <a href="#" class="login">Login</a>
-      <a href="#" class="signup">Start Free Trial</a>
+  } @else {
+    <div class="fanpage-navbar">
+      <div class="fanpage-navbar-left">
+        <a href="#" class="fanpage-brand">
+          Blog Profile
+        </a>
+      </div>
+
+      <div class="fanpage-navbar-right" [class.active]="isMenuOpen">
+        <div class="links">
+          <a href="#">Cree un Blog</a>
+          <a href="#">List Blog</a>
+
+          <div class="fanpage-nav-item" (mouseenter)="showDropdown('help')" (mouseleave)="hideDropdown('help')">
+
+          </div>
+          <div class="fanpage-nav-item" (mouseenter)="showDropdown('more')" (mouseleave)="hideDropdown('more')">
+            @if (isDropdownVisible('more')) {
+              <div class="fanpage-dropdown">
+                <a href="#">Cree un Blog</a>
+                <a href="#">List Blog</a>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="fanpage-login-buttons">
+          <a href="#" class="fanpage-upgrade-btn">logOut</a>
+          <a href="#" class="fanpage-user-profile">S</a>
+        </div>
+      </div>
     </div>
-  </div>
+  }
+
   <button class="hamburger" (click)="toggleMenu()">
     <span></span>
     <span></span>
     <span></span>
   </button>
+
 </div>
